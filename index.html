@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>トランプ遊び場</title>
+  <!-- 外部CSSファイルの読み込み -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-mobile.css" media="screen and (max-width: 600px)">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- 左側タブメニュー -->
+  <div id="side-tab">
+    <div style="display:flex;align-items:center;">
+      <div id="tab-btn">☰</div>
+      <div id="counter-area" style="display:none;">
+        <button id="counter-minus" class="counter-btn">－</button>
+        <span id="counter-value">0</span>
+        <button id="counter-plus" class="counter-btn">＋</button>
+        <button id="counter-reset" class="counter-btn">↺</button>
+      </div>
+      <div id="timer-area" style="display:none;">
+        <span id="timer-value">00:00</span>
+        <button id="timer-start" class="timer-btn">▶</button>
+        <button id="timer-stop" class="timer-btn">⏸</button>
+        <button id="timer-reset" class="timer-btn">↺</button>
+      </div>
+      <div id="stopwatch-area" style="display:none;">
+        <span id="stopwatch-value">00:00</span>
+        <button id="stopwatch-start" class="stopwatch-btn">▶</button>
+        <button id="stopwatch-stop" class="stopwatch-btn">⏸</button>
+        <button id="stopwatch-reset" class="stopwatch-btn">↺</button>
+      </div>
+    </div>
+    <div id="tab-menu">
+      <button id="stack-btn" class="menu-btn">山</button>
+      <button id="order-btn" class="menu-btn">順番</button>
+      <button id="shuffle-btn" class="menu-btn">シャッフル</button>
+      <button id="color-split-btn" class="menu-btn">色分け</button>
+      <button id="scatter-btn" class="menu-btn">バラバラ</button>
+      <button id="all-back-btn" class="menu-btn">全ウラ</button>
+      <button id="all-front-btn" class="menu-btn">全オモテ</button>
+    </div>
+  </div>
+  <div id="mode-toggle" style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;gap:8px;">
+    <!-- BGM/SEトグルボタンを追加（整列ボタンより少し左） -->
+    <button id="bgm-toggle-btn" style="width:40px;height:40px;border-radius:50%;background:#fff;color:#1565c0;border:2px solid #1565c0;margin-right:18px;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(21,101,192,0.10);cursor:pointer;">♪</button>
+    <button id="se-toggle-btn" style="width:40px;height:40px;border-radius:50%;background:#fff;color:#e53935;border:2px solid #e53935;margin-right:18px;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(229,57,53,0.10);cursor:pointer;">🔔</button>
+    <button id="align-btn" style="font-size:16px;padding:4px 16px;background:#fff;color:#222;border-radius:6px;border:1.5px solid #888;">整列</button>
+    <button id="free-btn" style="font-size:16px;padding:4px 16px;background:#ccc;color:#222;border-radius:6px;border:1.5px solid #888;">フリー</button>
+    <button id="game-btn" style="font-size:16px;padding:4px 16px;background:#fff;color:#222;border-radius:6px;border:1.5px solid #888;">ゲーム</button>
+  </div>
+  <div id="utility-buttons" style="position:fixed;top:16px;right:32px;z-index:3000;display:flex;gap:8px;">
+    <!-- <button id="stopwatch-btn" class="utility-btn" style="font-size:13px;padding:4px 12px;background:#fff;color:#222;border-radius:6px;border:1.5px solid #888;height:32px;min-width:60px;">ストップウォッチ</button> -->
+    <button id="counter-btn" class="utility-btn" style="font-size:13px;padding:4px 12px;background:#fff;color:#222;border-radius:6px;border:1.5px solid #888;height:32px;min-width:60px;">カウンター</button>
+  </div>
+  <h1>　</h1>
+  <!-- カードを表示するコンテナ -->
+  <div id="card-container" style="position:relative;"></div>
+  <div id="counter-area-left" class="corner-counter" style="display:none;position:fixed;top:12px;left:12px;z-index:4001;"></div>
+  <div id="counter-area-right" class="corner-counter" style="display:none;position:fixed;top:12px;right:12px;z-index:4001;"></div>
+  <!-- <div id="stopwatch-area" class="corner-counter" style="display:none;position:fixed;top:72px;left:50%;transform:translateX(-50%);z-index:4001;"></div> -->
+  <!-- ゲーム選択ポップアップ -->
+  <div id="game-popup" >
+    <div class="game-popup-bg"></div>
+    <div class="game-popup-content">
+      <button class="game-popup-close">✕</button>
+      <div class="game-popup-title">ゲームを選択</div>
+      <div class="game-popup-list">
+        <button class="game-title-btn">ネクスト</button>
+        <button class="game-title-btn">神経衰弱</button>
+        <button class="game-title-btn">セブンブリッジ</button>
+      </div>
+    </div>
+  </div>
+  <!-- 白フェードアウト用オーバーレイ -->
+  <div id="white-fade-overlay"></div>
+  <!-- 外部JavaScriptファイルの読み込み -->
+  <script src="script.js"></script>
+  <script src="script-mobile.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

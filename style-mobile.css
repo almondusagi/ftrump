@@ -1,0 +1,100 @@
+
+/* Mobile-specific styles */
+
+body {
+  -webkit-text-size-adjust: 100%; /* iOSでのテキストサイズ自動調整を無効化 */
+}
+
+#card-container {
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: none;
+  margin: 0;
+  border-radius: 0;
+  height: calc(100vh - 120px); /* 上部と下部の余白を考慮 */
+  margin-top: 60px;
+}
+
+.card {
+  width: 15vw; /* 画面幅に応じたサイズ */
+  height: 22.5vw; /* アスペクト比を維持 */
+  font-size: 3vw; /* 画面幅に応じたフォントサイズ */
+  padding: 1vw;
+}
+
+#side-tab {
+  width: auto;
+  height: auto;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  flex-direction: row;
+  justify-content: center;
+  background: rgba(24, 77, 26, 0.9);
+  padding: 8px 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.2);
+}
+
+#tab-btn {
+  display: none; /* ハンバーガーメニューは非表示 */
+}
+
+#tab-menu {
+  position: static;
+  flex-direction: row;
+  opacity: 1;
+  transform: none;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  gap: 8px;
+}
+
+.menu-btn {
+  font-size: 14px;
+  padding: 8px 12px;
+}
+
+#mode-toggle {
+  top: 12px;
+}
+
+#utility-buttons {
+  top: 12px;
+  right: 12px;
+}
+
+.corner-counter {
+  font-size: 24px;
+  height: 40px;
+  min-width: 120px;
+  padding: 2px 12px;
+}
+
+.corner-counter .counter-btn {
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
+}
+
+.corner-counter .counter-value {
+  min-width: 40px;
+}
+
+#game-popup .game-popup-content {
+  min-width: 80vw;
+  padding: 24px;
+}
+
+.game-popup-title {
+  font-size: 20px;
+}
+
+.game-title-btn {
+  font-size: 16px;
+  padding: 10px 24px;
+}
