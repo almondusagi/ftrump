@@ -356,16 +356,20 @@ function alignAllCardsGrid(cardsArr) {
   const cardH = allCards[0].offsetHeight || 90;
   
   const isMobile = window.innerWidth <= 900;
-  let cols = 6; // 横6列固定
-  let rows = Math.ceil(allCards.length / cols); // 縦9行
-  let gapX, gapY, startX, startY;
+  let cols, rows, gapX, gapY, startX, startY;
 
   if (!isMobile) {
+    // デスクトップ：元の9列6行に戻す
+    cols = 9;
+    rows = 6;
     gapX = (containerRect.width - cols * cardW) / (cols + 1);
     gapY = (containerRect.height - rows * cardH) / (rows + 1);
     startX = gapX;
     startY = gapY;
   } else {
+    // スマホ：横6列・縦9行に固定
+    cols = 6;
+    rows = Math.ceil(allCards.length / cols); // 9行
     gapX = (containerRect.width - cols * cardW) / (cols + 1);
     gapY = 4;
     startX = gapX;

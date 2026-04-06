@@ -34,6 +34,7 @@
   // ダブルタップ
   let lastTapCard    = null;
   let lastTapTime    = 0;
+  let lastBgTapTime  = 0;
 
   // パン
   let panOffsetX     = 0, panOffsetY     = 0;
@@ -220,8 +221,6 @@
       // 長押し → 範囲選択モード
       longPressTimer = setTimeout(() => {
         if (appState !== 'BG_TOUCH') return;
-        // 範囲選択は zoom=1 状態で行う（座標ずれ防止）
-        resetTransform();
         appState = 'BG_RANGESELECT';
         if (container) fireME(container, 'mousedown', touch, 0, false);
         longPressTimer = null;
@@ -329,6 +328,20 @@
     if (appState === 'BG_RANGESELECT') {
       fireME(document.body, 'mouseup', touch, 0, false);
     }
+    
+    // 背景の短押し（ダブルタップ判定）
+    if (appState === 'BG_TOUCH') {
+      const now = Date.now();
+      // 長押し（500ms以上）でなく、短時間のタッチであればダブルタップ判定
+      if (now - touchStartTime < LONG_PRESS_MS) {
+        if (now - lastBgTapTime < DOUBLE_TAP_MS) {
+          resetTransform();
+          lastBgTapTime = 0;
+        } else {
+          lastBgTapTime = now;
+        }
+      }
+    }
 
     appState = 'IDLE'; cardTarget = null;
   }, { passive: false });
@@ -364,16 +377,9 @@
     const mt = document.getElementById('mode-toggle');
     if (mt) { mt.style.left = '12px'; mt.style.right = 'auto'; mt.style.transform = 'none'; }
 
-    // 縦画面警告
-    const warn = document.createElement('div');
-    warn.className = 'portrait-warning'; warn.id = 'portrait-warning';
-    warn.innerHTML = '<div class="rotate-icon">📱</div><div>横画面でプレイしてください</div>';
-    document.body.appendChild(warn);
-
     function checkOrientation() {
       const isGame = document.body.classList.contains('shinkeisuijaku-mode') ||
                      document.body.classList.contains('next-mode');
-      warn.classList.toggle('active', isGame);
       if (isGame && document.body.classList.contains('shinkeisuijaku-mode'))
         mobileAdjustGrid();
     }

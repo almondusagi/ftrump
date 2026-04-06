@@ -153,19 +153,44 @@
   top: auto !important;
   left: 0 !important;
   right: 0 !important;
-  flex-direction: row !important;
+  flex-direction: column !important;
   justify-content: center !important;
   background: rgba(24, 77, 26, 0.97) !important;
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) !important;
+  padding: 4px 12px calc(8px + env(safe-area-inset-bottom)) !important;
   box-shadow: 0 -2px 12px rgba(0,0,0,0.3) !important;
   backdrop-filter: blur(4px);
   z-index: 5000 !important;
 }
-#tab-btn { display: none !important; }
+
+#side-tab > div:first-child {
+  width: 100%;
+  justify-content: center !important;
+}
+#tab-btn {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  font-size: 0 !important;
+  padding: 2px 0 6px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  pointer-events: auto !important;
+  border-radius: 0 !important;
+}
+#tab-btn::after {
+  content: "▲";
+  font-size: 20px;
+  color: white;
+  display: block;
+}
+#side-tab:has(#tab-menu.open) #tab-btn::after {
+  content: "▼";
+}
 
 #tab-menu {
   position: static !important;
-  display: flex !important;
+  display: none !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
@@ -180,6 +205,10 @@
   width: 100% !important;
   max-height: none !important;
   overflow: visible !important;
+  margin-top: 4px !important;
+}
+#tab-menu.open {
+  display: flex !important;
 }
 
 .menu-btn {
@@ -254,28 +283,6 @@
   width: 100% !important;
   -webkit-user-select: none;
   user-select: none;
-}
-
-/* ---- 縦画面の警告（ゲームモード中のみ） ---- */
-.portrait-warning {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #184d1a;
-  z-index: 99999;
-  color: #fff;
-  font-size: 20px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 16px;
-  text-align: center;
-  padding: 24px;
-}
-.portrait-warning .rotate-icon { font-size: 48px; }
-
-@media (orientation: portrait) {
-  .portrait-warning.active { display: flex; }
 }
 
 /* ---- hover 無効化（タッチデバイス） ---- */
