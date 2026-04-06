@@ -356,28 +356,19 @@ function alignAllCardsGrid(cardsArr) {
   const cardH = allCards[0].offsetHeight || 90;
   
   const isMobile = window.innerWidth <= 900;
-  let cols, rows, gapX, gapY, startX, startY;
-  
+  let cols = 6; // 横6列固定
+  let rows = Math.ceil(allCards.length / cols); // 縦9行
+  let gapX, gapY, startX, startY;
+
   if (!isMobile) {
-    // デスクトップ：固定の9列6行
-    cols = 9; rows = 6;
     gapX = (containerRect.width - cols * cardW) / (cols + 1);
     gapY = (containerRect.height - rows * cardH) / (rows + 1);
     startX = gapX;
     startY = gapY;
   } else {
-    // モバイル：カードが重ならない最大の列数を計算
-    const minGap = 2; // 最低2pxの隙間
-    cols = Math.floor((containerRect.width - minGap) / (cardW + minGap));
-    if (cols < 1) cols = 1;
-    // 隙間を均等に
     gapX = (containerRect.width - cols * cardW) / (cols + 1);
-    gapY = 4; // 縦の隙間は固定で少し詰める
-    
+    gapY = 4;
     startX = gapX;
-    
-    // 全体の高さを求めて上下中央寄り（上が見えなくなるのを防ぐ）
-    rows = Math.ceil(allCards.length / cols);
     const totalH = rows * cardH + (rows - 1) * gapY;
     startY = Math.max(gapY, (containerRect.height - totalH) / 2);
   }
@@ -1743,10 +1734,12 @@ function initializeToDefaultState() {
   cleanupShinkeisuijakuMode();
   // ===== ネクスト状態の設定を初期化 =====
   cleanupNextMode();
-  // カードを全て削除
+  // カードを全て削除（ただし#card-canvas等ラッパー要素は消さない）
   const container = document.getElementById('card-container');
   if (container) {
-    while (container.firstChild) container.removeChild(container.firstChild);
+    document.querySelectorAll('.card').forEach(c => c.remove());
+    const selBox = container.querySelector('div[style*="dashed"]');
+    if (selBox) selBox.remove();
   }
   // カードを初期状態で再生成
   for (let suit of suits) {

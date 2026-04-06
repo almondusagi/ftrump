@@ -398,19 +398,16 @@
     const total  = allCards.length;
     const gapX = 3, gapY = 3;
 
-    let bestCols = 9, bestW = 0;
-    for (let cols = 7; cols <= 13; cols++) {
-      const rows  = Math.ceil(total / cols);
-      const scaleW = (availW - gapX * (cols - 1)) / cols;
-      const scaleH = (availH - gapY * (rows - 1)) / rows / 1.5;
-      const w = Math.min(scaleW, scaleH);
-      if (w > bestW) { bestW = w; bestCols = cols; }
-    }
+    const cols = 6;
+    const rows = 9;
+    
+    // アスペクト比 1:1.5で計算
+    const scaleW = (availW - gapX * (cols - 1)) / cols;
+    const scaleH = (availH - gapY * (rows - 1)) / rows / 1.5;
+    const bestW = Math.min(scaleW, scaleH);
 
     const cardW = Math.floor(bestW);
     const cardH = Math.floor(bestW * 1.5);
-    const cols  = bestCols;
-    const rows  = Math.ceil(total / cols);
     const startX = Math.max(4, (availW - cols * (cardW + gapX) + gapX) / 2);
     const startY = Math.max(4, (availH - rows * (cardH + gapY) + gapY) / 2);
 

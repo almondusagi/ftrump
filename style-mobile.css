@@ -191,10 +191,14 @@
   max-width: 72px !important;
 }
 
+#counter-btn {
+  display: none !important;
+}
+
 /* ---- スコアバー（ゲーム中の残りペア表示）---- */
-/* → ゲームエリアに被らないよう最上部へ固定、コンパクトに */
+/* → プレイヤー表示のすぐ下に配置 */
 .game-score-bar {
-  top: 36px !important;
+  top: 68px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   padding: 3px 8px !important;
