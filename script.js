@@ -348,22 +348,52 @@ let isFreeMode = true; // デフォルトはフリー
 
 function alignAllCardsGrid(cardsArr) {
   const allCards = cardsArr || Array.from(document.querySelectorAll('.card'));
+  if (allCards.length === 0) return;
   const containerRect = container.getBoundingClientRect();
-  const cols = 9, rows = 6;
-  const cardW = 60, cardH = 90;
-  const gapX = (containerRect.width - cols * cardW) / (cols + 1);
-  const gapY = (containerRect.height - rows * cardH) / (rows + 1);
+  
+  // transformの影響を受けない実サイズを取得
+  const cardW = allCards[0].offsetWidth || 60;
+  const cardH = allCards[0].offsetHeight || 90;
+  
+  const isMobile = window.innerWidth <= 900;
+  let cols, rows, gapX, gapY, startX, startY;
+  
+  if (!isMobile) {
+    // デスクトップ：固定の9列6行
+    cols = 9; rows = 6;
+    gapX = (containerRect.width - cols * cardW) / (cols + 1);
+    gapY = (containerRect.height - rows * cardH) / (rows + 1);
+    startX = gapX;
+    startY = gapY;
+  } else {
+    // モバイル：カードが重ならない最大の列数を計算
+    const minGap = 2; // 最低2pxの隙間
+    cols = Math.floor((containerRect.width - minGap) / (cardW + minGap));
+    if (cols < 1) cols = 1;
+    // 隙間を均等に
+    gapX = (containerRect.width - cols * cardW) / (cols + 1);
+    gapY = 4; // 縦の隙間は固定で少し詰める
+    
+    startX = gapX;
+    
+    // 全体の高さを求めて上下中央寄り（上が見えなくなるのを防ぐ）
+    rows = Math.ceil(allCards.length / cols);
+    const totalH = rows * cardH + (rows - 1) * gapY;
+    startY = Math.max(gapY, (containerRect.height - totalH) / 2);
+  }
+
   // グリッド順序を保存
   if (!cardsArr) {
     alignGridOrder = allCards.slice();
   } else {
     alignGridOrder = cardsArr.slice();
   }
+  
   allCards.forEach((card, i) => {
     const col = i % cols;
     const row = Math.floor(i / cols);
-    const left = gapX + col * (cardW + gapX);
-    const top = gapY + row * (cardH + gapY);
+    const left = startX + col * (cardW + gapX);
+    const top = startY + row * (cardH + gapY);
     card.style.transition = 'left 0.5s cubic-bezier(.4,2,.6,1), top 0.5s cubic-bezier(.4,2,.6,1)';
     card.style.left = left + 'px';
     card.style.top = top + 'px';
