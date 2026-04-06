@@ -1452,8 +1452,8 @@ function setupGameShinkeisuijaku() {
                 shinkeisuijakuState.lock = false;
                 shinkeisuijakuState.pairs[currentPlayer-1]++;  // ペアカウント
                 shinkeisuijakuState.score[currentPlayer-1]++;  // スコア
-                updateShinkeisuijakuScore();
-                shinkeisuijakuState.totalPairs--;
+                shinkeisuijakuState.totalPairs--;              // 先に減算
+                updateShinkeisuijakuScore();                   // 減算後に表示更新
                 // 全ペア取得で終了
                 if (shinkeisuijakuState.totalPairs === 0) {
                   setTimeout(() => {
