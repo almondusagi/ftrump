@@ -815,14 +815,15 @@ tabBtn.addEventListener('click', () => {
   tabMenu.classList.toggle('open');
 });
 
-// メニューボタン健打後にメニューを自動クローズ
+// メニューボタン押下後にメニューを自動クローズする機能は削除（手動開閉のみ）
+/*
 document.querySelectorAll('#tab-menu .menu-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     setTimeout(() => tabMenu.classList.remove('open'), 200);
   });
 });
 
-// メニュー外クリックでクローズ
+// メニュー外クリックでクローズする機能も削除（手動開閉のみ）
 document.addEventListener('click', (e) => {
   if (!tabMenu.classList.contains('open')) return;
   const sideTab = document.getElementById('side-tab');
@@ -830,6 +831,7 @@ document.addEventListener('click', (e) => {
     tabMenu.classList.remove('open');
   }
 });
+*/
 
 // ===== カウンターボタン =====
 const counterBtn = document.getElementById('counter-btn');

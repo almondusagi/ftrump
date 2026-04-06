@@ -71,10 +71,10 @@
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
-  height: calc(100vh - 130px) !important;
-  min-height: calc(100vh - 130px) !important;
+  height: calc(100vh - 110px) !important;
+  min-height: calc(100vh - 110px) !important;
   max-height: none !important;
-  margin: 52px 0 78px 0 !important;
+  margin: 74px 0 36px 0 !important;
   border-radius: 0 !important;
   overflow: hidden !important;
   touch-action: none;
@@ -115,12 +115,14 @@
     font-size: 10px !important;
     padding: 2px 6px !important;
   }
+  
+  #keyboard-hint { display: none !important; }
 
   /* カードコンテナ（横画面） */
   #card-container {
-    height: calc(100vh - 104px) !important;
-    min-height: calc(100vh - 104px) !important;
-    margin: 38px 0 66px 0 !important;
+    height: calc(100vh - 84px) !important;
+    min-height: calc(100vh - 84px) !important;
+    margin: 68px 0 16px 0 !important;
   }
 
   /* カードサイズ（横画面 60%縮小後）→ viewport height 基準 */
@@ -225,33 +227,33 @@
 }
 
 /* ---- スコアバー（ゲーム中の残りペア表示）---- */
-/* → プレイヤー表示のすぐ下に配置 */
+/* → 手番表示のすぐ下へ */
 .game-score-bar {
-  top: 68px !important;
+  top: 44px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  padding: 3px 8px !important;
-  gap: 6px !important;
-  font-size: 11px !important;
-  max-width: calc(100vw - 24px) !important;
-  border-radius: 8px !important;
+  padding: 2px 6px !important;
+  gap: 4px !important;
+  font-size: 10px !important;
+  max-width: 95vw !important;
+  border-radius: 6px !important;
   white-space: nowrap !important;
 }
-.score-value  { font-size: 14px !important; }
-.score-label  { font-size: 8px !important; }
-.score-sep    { font-size: 12px !important; }
-.score-remain { font-size: 12px !important; }
+.score-value  { font-size: 12px !important; }
+.score-label  { font-size: 7px !important; }
+.score-sep    { font-size: 10px !important; }
+.score-remain { font-size: 10px !important; }
 
 /* ---- プレイヤーインジケーター ---- */
-/* → 文字折り返しを防ぎ、コンパクトな1行表示に */
+/* → 上部ボタンとスコアバーの間に配置 */
 #player-indicator {
-  top: 36px !important;
-  font-size: 11px !important;
-  gap: 8px !important;
-  padding: 3px 10px !important;
+  top: 18px !important;
+  font-size: 10px !important;
+  gap: 6px !important;
+  padding: 2px 8px !important;
   margin-top: 0 !important;
   white-space: nowrap !important;
-  max-width: calc(100vw - 24px) !important;
+  max-width: 95vw !important;
 }
 #player-indicator .player-chip {
   font-size: 10px !important;
@@ -259,15 +261,31 @@
   gap: 4px !important;
 }
 #player-indicator .versus {
-  font-size: 10px !important;
+  font-size: 9px !important;
 }
 
-/* ゲーム中のボタン */
-#shinkei-interrupt-btn, #shinkei-reset-btn,
-[id$="-interrupt-btn"], [id$="-reset-btn"] {
-  font-size: 11px !important;
-  padding: 4px 10px !important;
-  height: 30px !important;
+/* ゲーム中のボタン (中断・リセット・混ぜる) */
+#shinkeisuijaku-btn-area, #next-btn-area {
+  top: 6px !important;
+  right: 6px !important;
+  gap: 4px !important;
+}
+#mix-btn, #next-mix-btn {
+  top: 6px !important;
+  left: 6px !important;
+  font-size: 10px !important;
+  padding: 3px 8px !important;
+  height: 24px !important;
+}
+#pause-btn, #reset-btn,
+#next-pause-btn, #next-reset-btn {
+  font-size: 10px !important;
+  padding: 3px 8px !important;
+  height: 24px !important;
+}
+
+#keyboard-hint {
+  display: none !important;
 }
 
 /* ---- ゲームポップアップ ---- */
