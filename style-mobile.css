@@ -80,13 +80,13 @@
   touch-action: none;
 }
 
-/* ---- カードサイズ（縦画面デフォルト） ---- */
+/* ---- カードサイズ（縦画面 60%縮小後） ---- */
 .card {
-  width: 13vw !important;
-  height: 19.5vw !important;
-  font-size: 2.4vw !important;
-  padding: 3px !important;
-  border-radius: 5px !important;
+  width: 8vw !important;
+  height: 12vw !important;
+  font-size: 1.5vw !important;
+  padding: 2px !important;
+  border-radius: 4px !important;
   touch-action: none !important;
 }
 
@@ -123,13 +123,13 @@
     margin: 38px 0 66px 0 !important;
   }
 
-  /* カードサイズ（横画面）→ viewport height 基準 */
+  /* カードサイズ（横画面 60%縮小後）→ viewport height 基準 */
   .card {
-    width: calc((100vh - 128px) * 0.105) !important;  /* 行数6で収まる高さ × 2/3 */
-    height: calc((100vh - 128px) * 0.158) !important;
-    font-size: 1.4vh !important;
+    width: calc((100vh - 128px) * 0.063) !important;
+    height: calc((100vh - 128px) * 0.095) !important;
+    font-size: 1.0vh !important;
     padding: 2px !important;
-    border-radius: 4px !important;
+    border-radius: 3px !important;
   }
 
   /* サイドタブ（横画面） */
