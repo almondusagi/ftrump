@@ -49,6 +49,7 @@ body {
   transition: box-shadow 0.2s, transform 0.2s;
   overflow: hidden;
   cursor: grab;
+  touch-action: none; /* タッチドラッグ時にスクロール干渉防止 */
   /* 3Dフリップ用 */
   transform-style: preserve-3d;
   perspective: 600px;

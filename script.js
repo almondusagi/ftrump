@@ -1,3 +1,6 @@
+// ===== コンテキストメニュー全体無効化 =====
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
 // トランプのスートと記号
 const suits = [
   { name: 'spade', symbol: '♠' },
@@ -2090,7 +2093,7 @@ function resetShinkeisuijakuState() {
     lock: false, // 判定中ロック
     score: [0, 0], // [プレイヤー1, プレイヤー2] ペア枚数
     pairs: [0, 0], // 取得ペア枚数
-    totalPairs: 26, // 52枚/2
+    totalPairs: 27, // 54枚(ジョーカー含む)/2
   };
 }
 function updateShinkeisuijakuScore() {
@@ -2165,7 +2168,7 @@ function resetNextState() {
     flipped: [], // めくったカード
     lock: false, // 判定中ロック
     score: [0, 0], // [プレイヤー1, プレイヤー2]
-    totalPairs: 26, // 52枚/2
+    totalPairs: 27, // 54枚(ジョーカー含む)/2
   };
 }
 function updateNextScore() {
