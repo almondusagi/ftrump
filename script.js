@@ -323,7 +323,7 @@ for (let suit of suits) {
 for (let i = 0; i < 2; i++) {
   const joker = document.createElement('div');
   joker.classList.add('card', 'joker');
-  const jokerHtml = i === 0 ? 'JOKER<br>🃏' : 'JOKER<br>🃟';
+  const jokerHtml = `<div style="font-size:10px;font-weight:bold;line-height:1.1;">JOKER</div><div style="font-size:20px;align-self:flex-end;">${i === 0 ? '\uD83C\uDCCF' : '\uD83C\uDCDF'}</div>`;
   joker.innerHTML = jokerHtml;
   joker.dataset.frontHtml = jokerHtml;
   // 神経衰弱モード用の画像パスを保存
@@ -2149,11 +2149,12 @@ function showShinkeisuijakuResult() {
   }
   // hakusyu.mp3のSEを流す
   window.playSE('SE/hakusyu.mp3');
+  resultElem.style.color = '#222';
   let msg = '';
-  if (shinkeisuijakuState.score[0] > shinkeisuijakuState.score[1]) msg = 'プレイヤー1の勝ち！';
-  else if (shinkeisuijakuState.score[0] < shinkeisuijakuState.score[1]) msg = 'プレイヤー2の勝ち！';
-  else msg = '引き分け！';
-  resultElem.innerHTML = `<div>${msg}</div><div style='font-size:20px;margin-top:12px;'>P1: ${shinkeisuijakuState.score[0]} pt　P2: ${shinkeisuijakuState.score[1]} pt</div>`;
+  if (shinkeisuijakuState.pairs[0] > shinkeisuijakuState.pairs[1]) msg = '🏆 プレイヤー1の勝ち！';
+  else if (shinkeisuijakuState.pairs[0] < shinkeisuijakuState.pairs[1]) msg = '🏆 プレイヤー2の勝ち！';
+  else msg = '🤝 引き分け！';
+  resultElem.innerHTML = `<div style="font-size:26px;">${msg}</div><div style="font-size:18px;margin-top:12px;color:#555;">P1: ${shinkeisuijakuState.pairs[0]} ペア　P2: ${shinkeisuijakuState.pairs[1]} ペア</div>`;
   resultElem.style.display = 'block';
 }
 function hideShinkeisuijakuResult() {
